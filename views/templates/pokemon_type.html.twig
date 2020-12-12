@@ -1,0 +1,8 @@
+<div id="type">
+    <ul>
+        <li><a href="{{constant('pokemon\\Bootstrap::ENTRY_URL')}}index.php">全て</a></li>
+        {% for value in typeArr %}
+            <li><a href="{{constant('pokemon\\Bootstrap::ENTRY_URL')}}index.php?type_id={{value.type_id}}&type_id2={{value.type_id}}">{{value.type_name}}</a></li>
+        {% endfor %}
+    </ul>
+</div>

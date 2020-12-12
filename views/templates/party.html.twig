@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+            <link href="{{constant('pokemon\\Bootstrap::ENTRY_URL')}}css/pokemon.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="party_list">
+                <p>パーティー編集</p>
+                <p><a href="{{constant('pokemon\\Bootstrap::ENTRY_URL')}}index.php">ポケモン一覧へ戻る</a></p>
+                <p>現在編成数:{{sumNum}}体</p>
+                {% if sumNum > 6 %}
+                <div class="sumNumError"><p>パーティーは6体以下で編成してください</p></div>
+                {% endif %}
+                {% if sumNum != unique %}
+                <div class="sumNumError"><p>パーティーに同じポケモンを２体以上編成することはできません</p></div>
+                {% endif %}
+                    {% if dataArr | length == 0 %}
+                        <p>ポケモンが登録されていません</p>
+                    {% else %}
+                        {% for value in dataArr %}
+                            <div class="pokemon">
+                                <ul>
+                                    <li class="image"><img src="{{constant('pokemon\\Bootstrap::ENTRY_URL')}}images/{{value.image}}.png" alt="{{value.pokemon_name}}" /></li>
+                                    <li class="name">{{value.pokemon_name}}</li>
+                                    <li class="hp">HP/{{value.hp|number_format(0,'.',',')}}</li>
+                                    <li><a href="{{constant('pokemon\\Bootstrap::ENTRY_URL')}}index.php?display=party&party_id={{value.party_id}}">削除</a></li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+            </div>
+        </div>
+    </body>
+</html>
